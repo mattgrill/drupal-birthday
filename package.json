@@ -6,13 +6,12 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint -c .eslintrc.json .",
     "prettier": "./node_modules/.bin/prettier --write 'src/**/*.js'",
-    "start": "./node_modules/.bin/micro src/index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "date-fns": "^1.29.0",
     "drupal-org-api": "^1.0.2",
-    "micro": "^9.1.0",
-    "microrouter": "^3.0.0"
+    "express": "^4.16.2"
   },
   "devDependencies": {
     "eslint": "^4.9.0",

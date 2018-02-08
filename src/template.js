@@ -11,11 +11,11 @@ const header = title => `
   </head>
 `;
 
-const render = (date, username) => `
+const render = (date, username, isBirthday) => `
   <html>
     ${header(username)}
     <body>
-      <p><b>${username}</b>, your drupal.org birthday is, <b>${date}</b></p>
+      <p>${isBirthday}<b>${username}</b>, your drupal.org birthday is, <b>${date}</b>${isBirthday}</p>
     </body>
   </html>
 `;

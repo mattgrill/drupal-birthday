@@ -1,23 +1,37 @@
-const { send } = require('micro');
-const { router, get } = require('microrouter');
+const express = require('express');
 const DrupalAPI = require('drupal-org-api');
-const { format } = require('date-fns');
+const { format, compareAsc } = require('date-fns');
 const template = require('./template');
 
+const app = express();
 const drupalapi = new DrupalAPI();
 
-const api = (req, res) =>
-  drupalapi
+const handler = async (req, res) => {
+  const accountCreationDate = await drupalapi
     .user({ name: req.params.username })
-    .then(({ list }) =>
-      send(
-        res,
-        200,
-        template.render(
-          format(new Date(list[0].created * 1000), 'MMMM Do @ HH:mm'),
-          req.params.username,
-        ),
+    .then(({ list }) => ({
+      formattedDate: format(
+        new Date(list[0].created * 1000),
+        'MMMM Do @ HH:mm',
       ),
-    );
+      compareableDate: format(new Date(list[0].created * 1000), 'MM/DD'),
+    }));
+  const isBirthday =
+    compareAsc(
+      format(new Date(), 'MM/DD'),
+      accountCreationDate.compareableDate,
+    ) === 1
+      ? ' 🎂 '
+      : '';
+  return res.send(
+    template.render(
+      accountCreationDate.formattedDate,
+      req.params.username,
+      isBirthday,
+    ),
+  );
+};
 
-module.exports = router(get('/:username', api));
+app.get('/:username', handler);
+
+app.listen(3000, () => console.log('Listening on port 3000!'));
