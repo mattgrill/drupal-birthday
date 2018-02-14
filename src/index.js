@@ -15,7 +15,8 @@ const handler = async (req, res) => {
         'MMMM Do @ HH:mm',
       ),
       compareableDate: format(new Date(list[0].created * 1000), 'MM/DD'),
-    }));
+    }))
+    .catch(console.error);
   const isBirthday =
     compareAsc(
       format(new Date(), 'MM/DD'),
@@ -32,6 +33,7 @@ const handler = async (req, res) => {
   );
 };
 
+app.get('/favicon.ico', (req, res) => res.status(404));
 app.get('/:username', handler);
 app.get('/', (req, res) => res.send('You need to specify a username in the URL'));
 
