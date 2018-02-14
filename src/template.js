@@ -11,11 +11,13 @@ const header = title => `
   </head>
 `;
 
-const render = (date, username, isBirthday) => `
+const render = (date, username, isBirthday, accountCreatedDate) => `
   <html>
     ${header(username)}
     <body>
-      <p>${isBirthday}<b>${username}</b>, your drupal.org birthday is, <b>${date}</b>${isBirthday}</p>
+      <p>${isBirthday} <b>${username}</b>${
+  isBirthday !== '' ? ' ' + isBirthday : ''
+}, your drupal.org birthday is, <b>${date}</b>, and your account was created on, <b>${accountCreatedDate}</b>.</p>
     </body>
   </html>
 `;
