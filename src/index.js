@@ -18,10 +18,9 @@ const handler = async (req, res) => {
         new Date(accounts[0].created * 1000),
         `MMMM Do ${new Date().getFullYear()} @ HH:mm`,
       ),
-      accountCreatedDate: format(
-        new Date(accounts[0].created * 1000),
-        `MMMM Do YYYY`,
-      ),
+      ageOfAccount:
+        new Date().getFullYear() -
+        Number(format(new Date(accounts[0].created * 1000), `YYYY`)),
       compareableDate: format(new Date(accounts[0].created * 1000), 'MM/DD'),
     };
     const isBirthday =
@@ -35,7 +34,7 @@ const handler = async (req, res) => {
       accountCreationDetails.formattedDate,
       req.params.username,
       isBirthday,
-      accountCreationDetails.accountCreatedDate,
+      accountCreationDetails.ageOfAccount,
     );
     responseData = { status, payload };
   } else {
