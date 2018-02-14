@@ -29,7 +29,7 @@ const handler = async (req, res) => {
         accountCreationDetails.compareableDate,
       ) === 0
         ? '🎂'
-        : '';
+        : false;
     const payload = template.render(
       accountCreationDetails.formattedDate,
       req.params.username,

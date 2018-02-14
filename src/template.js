@@ -15,8 +15,8 @@ const render = (date, username, isBirthday, ageOfAccount) => `
   <html>
     ${header(username)}
     <body>
-      <p>${isBirthday} <b>${username}</b>${
-  isBirthday !== '' ? ' ' + isBirthday : ''
+      <p>${isBirthday || ''} <b>${username}</b>${
+  isBirthday ? ` ${isBirthday}` : ''
 }, your drupal.org birthday is, <b>${date}</b>. Your account is, <b>${ageOfAccount}</b> year${
   ageOfAccount > 1 ? 's' : ''
 } old.</p>
