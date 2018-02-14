@@ -33,5 +33,6 @@ const handler = async (req, res) => {
 };
 
 app.get('/:username', handler);
+app.get('/', (req, res) => res.send('You need to specify a username in the URL'));
 
 app.listen(3000, () => console.log('Listening on port 3000!'));
