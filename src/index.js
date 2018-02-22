@@ -1,6 +1,6 @@
 const express = require('express');
 const DrupalAPI = require('drupal-org-api');
-const { format, compareAsc } = require('date-fns');
+const { format, compareAsc, differenceInMonths } = require('date-fns');
 const template = require('./template');
 
 const app = express();
@@ -18,9 +18,15 @@ const handler = async (req, res) => {
         new Date(accounts[0].created * 1000),
         `MMMM Do ${new Date().getFullYear()} @ HH:mm`,
       ),
-      ageOfAccount:
-        new Date().getFullYear() -
-        Number(format(new Date(accounts[0].created * 1000), `YYYY`)),
+      age: {
+        year: Math.floor(
+          differenceInMonths(new Date(), new Date(accounts[0].created * 1000)) /
+            12,
+        ),
+        month:
+          differenceInMonths(new Date(), new Date(accounts[0].created * 1000)) %
+          12,
+      },
       compareableDate: format(new Date(accounts[0].created * 1000), 'MM/DD'),
     };
     const isBirthday =
@@ -32,9 +38,9 @@ const handler = async (req, res) => {
         : false;
     const payload = template.render(
       accountCreationDetails.formattedDate,
+      accountCreationDetails.age,
       req.params.username,
       isBirthday,
-      accountCreationDetails.ageOfAccount,
     );
     responseData = { status, payload };
   } else {

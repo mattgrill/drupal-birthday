@@ -11,15 +11,17 @@ const header = title => `
   </head>
 `;
 
-const render = (date, username, isBirthday, ageOfAccount) => `
+const render = (formattedDate, { year, month }, username, isBirthday) => `
   <html>
     ${header(username)}
     <body>
       <p>${isBirthday || ''} <b>${username}</b>${
   isBirthday ? ` ${isBirthday}` : ''
-}, your drupal.org birthday is, <b>${date}</b>. Your account is, <b>${ageOfAccount}</b> year${
-  ageOfAccount > 1 ? 's' : ''
-} old.</p>
+}, your drupal.org birthday is, <b>${formattedDate}</b>. Your account is, <b>${
+  year !== 0 ? `${year} year` : ''
+}${year > 1 ? 's' : ''} ${
+  month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''
+}${month > 1 ? 's' : ''}</b> old.</p>
     </body>
   </html>
 `;
