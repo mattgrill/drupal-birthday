@@ -17,7 +17,7 @@ const render = (formattedDate, { year, month }, username, isBirthday) => `
     <body>
       <p>${isBirthday || ''} <b>${username}</b>${
   isBirthday ? ` ${isBirthday}` : ''
-}, your drupal.org birthday is, <b>${formattedDate}</b>. Your account is, <b>${
+}, your drupal.org birthday is <b>${formattedDate}</b>. Your account is <b>${
   year !== 0 ? `${year} year` : ''
 }${year > 1 ? 's' : ''} ${
   month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''
