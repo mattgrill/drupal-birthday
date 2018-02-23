@@ -3,7 +3,7 @@ module.exports = () =>
     html, body {
       height: 100%;
       text-align: center;
-      font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera San;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;;
       text-rendering: geometricPrecision;
     }
     p {
