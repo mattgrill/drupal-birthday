@@ -14,17 +14,15 @@ const render = ({ display, age, isBirthday, username }) => `
     <head>
       ${header(username)}
       <meta name="title" content="${title}'s Drupal Birthday" />
-      <meta name="description" content="" />
-
+      <meta name="description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Drupal Birthday . Fun" />
       <meta property="og:title" content="${title}'s Drupal Birthday" />
-      <meta property="og:description" content="" />
+      <meta property="og:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
       <meta property="og:url" content="https://drupalbirthday.fun/${username}" />
-
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content="${title}'s Drupal Birthday" />
-      <meta name="twitter:description" content="" />
+      <meta name="twitter:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
       <meta name="twitter:url" content="https://drupalbirthday.fun/${username}" />
     </head>
     <body>
@@ -43,6 +41,30 @@ const homepage = () => `
     <style>
       ${css()}
     </style>
+    <meta name="title" content="Drupal Birthday . Fun" />
+    <meta name="description" content="Find your Drupal Birthday, for Fun!" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Drupal Birthday . Fun" />
+    <meta property="og:title" content="Drupal Birthday . Fun" />
+    <meta property="og:description" content="Find your Drupal Birthday, for Fun!" />
+    <meta property="og:url" content="https://drupalbirthday.fun/" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Drupal Birthday . Fun" />
+    <meta name="twitter:description" content="Find your Drupal Birthday, for Fun!" />
+    <meta name="twitter:url" content="https://drupalbirthday.fun/" />
+    <script type="application/ld+json"> {
+        "@context": "http://schema.org",
+            "@type": "WebSite",
+            "url": "https://drupalbirthday.fun/",
+            "name": "Drupal Birthday . Fun",
+            "potentialAction": {
+            "@type": "SearchAction",
+                "target": "https://drupalbirthday.fun/{query}",
+                "query-input": "required"
+        }
+    } </script>
     <body>
       <p>https://drupalbirthday.fun/{your drupal.org username}</p>
     </body>
