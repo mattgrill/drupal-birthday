@@ -1,60 +1,48 @@
 const express = require('express');
 const DrupalAPI = require('drupal-org-api');
-const { format, compareAsc, differenceInMonths } = require('date-fns');
+
+const { to, createPayload, apiTimeExtras } = require('./lib');
 const template = require('./template');
 
 const app = express();
 const drupalapi = new DrupalAPI();
 
 const handler = async (req, res) => {
-  let responseData = {};
-  const { list: accounts } = await drupalapi
-    .user({ name: req.params.username })
-    .catch(() => false);
-  if (accounts && accounts.length) {
-    const status = 200;
-    const accountCreationDetails = {
-      formattedDate: format(
-        new Date(accounts[0].created * 1000),
-        `MMMM Do ${new Date().getFullYear()} @ HH:mm`,
-      ),
-      age: {
-        year: Math.floor(
-          differenceInMonths(new Date(), new Date(accounts[0].created * 1000)) /
-            12,
-        ),
-        month:
-          differenceInMonths(new Date(), new Date(accounts[0].created * 1000)) %
-          12,
-      },
-      compareableDate: format(new Date(accounts[0].created * 1000), 'MM/DD'),
-    };
-    const isBirthday =
-      compareAsc(
-        format(new Date(), 'MM/DD'),
-        accountCreationDetails.compareableDate,
-      ) === 0
-        ? '🎂'
-        : false;
-    const payload = template.render(
-      accountCreationDetails.formattedDate,
-      accountCreationDetails.age,
-      req.params.username,
-      isBirthday,
-    );
-    responseData = { status, payload };
-  } else {
-    const status = 404;
-    const payload = template.error(req.params.username);
-    responseData = { status, payload };
-  }
+  const [err, data] = await to(drupalapi.user({ name: req.params.username }));
 
-  return res.status(responseData.status).send(responseData.payload);
+  if (err || !data || !data.list.length)
+    return res.status(500).send(template.error(req.params.username));
+
+  const { list: accounts } = data;
+  const [user] = accounts;
+
+  return res
+    .status(200)
+    .send(
+      template.render(
+        createPayload(req.params.username, user.created, new Date().getTime()),
+      ),
+    );
 };
 
 const apiHandler = async (req, res) => {
-  const data = await drupalapi.user({ name: req.params.username });
-  return res.send(data);
+  const [err, data] = await to(drupalapi.user({ name: req.params.username }));
+
+  if (err || !data || !data.list.length)
+    return res.status(500).send(template.error(req.params.username));
+
+  const { list: accounts } = data;
+  const [user] = accounts;
+
+  const currentTime = new Date().getTime();
+
+  return res.send(
+    Object.assign(
+      { user },
+      createPayload(req.params.username, user.created, currentTime),
+      apiTimeExtras(user.created, currentTime),
+    ),
+  );
 };
 
 app.get('/api/:username', apiHandler);
