@@ -14,15 +14,15 @@ const render = ({ display, age, isBirthday, username }) => `
     <head>
       ${header(username)}
       <meta name="title" content="${title}'s Drupal Birthday" />
-      <meta name="description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
+      <meta name="description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${display}. The account is ${age} old." />
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content="Drupal Birthday . Fun" />
       <meta property="og:title" content="${title}'s Drupal Birthday" />
-      <meta property="og:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
+      <meta property="og:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${display}. The account is ${age} old." />
       <meta property="og:url" content="https://drupalbirthday.fun/${username}" />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:title" content="${title}'s Drupal Birthday" />
-      <meta name="twitter:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${formattedDate}. The account is ${year !== 0 ? `${year} year` : ''}${year > 1 ? 's' : ''} ${month !== 0 ? `${year !== 0 ? '&' : ''} ${month} month` : ''}${month > 1 ? 's' : ''} old." />
+      <meta name="twitter:description" content="${isBirthday || ''} ${username}${isBirthday ? ` ${isBirthday}` : ''}'s drupal.org birthday is ${display}. The account is ${age} old." />
       <meta name="twitter:url" content="https://drupalbirthday.fun/${username}" />
     </head>
     <body>
