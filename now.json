@@ -2,6 +2,7 @@
   "version": 2,
   "routes": [
     { "src": "/", "dest": "/api/index.js" },
-    { "src": "/screen.css", "dest": "/public/styles.css" }
+    { "src": "/screen.css", "dest": "/public/styles.css" },
+    { "src": "/lookup", "methods": ["POST"], "dest": "/api/lookup.js" }
   ]
 }
