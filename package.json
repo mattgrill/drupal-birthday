@@ -20,7 +20,11 @@
     "extends": [
       "airbnb",
       "plugin:prettier/recommended"
-    ]
+    ],
+    "env": {
+      "browser": true,
+      "node": true
+    }
   },
   "prettier": {
     "printWidth": 80,
