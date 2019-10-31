@@ -1,5 +1,5 @@
-(async () => {
-  if (window.location.hash && window.location.hash !== '') {
+(() => {
+  const fetchInformation = async () => {
     const response = await window.fetch('/api', {
       method: 'POST',
       cache: 'no-cache',
@@ -17,5 +17,11 @@
       ''} <b>${username}</b>${
       isBirthday ? ` ${isBirthday}` : ''
     }, your Drupal.org account was created at <b>${display}</b>. Your account is <b>${age}</b> old.</p>`;
+  };
+  window.onhashchange = () => {
+    fetchInformation();
+  };
+  if (window.location.hash && window.location.hash !== '') {
+    fetchInformation();
   }
 })();
