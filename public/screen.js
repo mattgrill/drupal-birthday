@@ -8,15 +8,14 @@
       },
       referrer: 'no-referrer',
       body: JSON.stringify({
-        username: window.location.hash.substring(1),
-        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        username: window.location.hash.substring(1)
       }),
     });
     const { display, age, isBirthday, username } = await response.json();
     document.getElementById('root').innerHTML = `<p>${isBirthday ||
       ''} <b>${username}</b>${
       isBirthday ? ` ${isBirthday}` : ''
-    }, your Drupal.org account was created at <b>${display}</b>. Your account is <b>${age}</b> old.</p>`;
+    }, your Drupal.org account was created at <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
   };
   window.onhashchange = () => {
     fetchInformation();
