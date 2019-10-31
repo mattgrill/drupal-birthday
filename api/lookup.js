@@ -30,6 +30,6 @@ module.exports = async (req, res) => {
   } = await fetch(
     `https://www.drupal.org/api-d7/user.json?name=${username}`,
   ).then(response => response.json());
-  const payload = createPayload(username, user.created, new Date().getTime());
+  const payload = createPayload(user.name, user.created, new Date().getTime());
   return res.status(200).send(payload);
 };

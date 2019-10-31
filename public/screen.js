@@ -12,7 +12,7 @@
       }),
     });
     const { display, age, isBirthday, username } = await response.json();
-    document.getElementById('root').innerHTML = `<p>${isBirthday ||
+    document.getElementById('root').innerHTML = `<p>✌️ ${isBirthday ||
       ''} <b>${username}</b>${
       isBirthday ? ` ${isBirthday}` : ''
     }, your Drupal.org account was created on <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
