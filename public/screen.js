@@ -15,7 +15,7 @@
     document.getElementById('root').innerHTML = `<p>${isBirthday ||
       ''} <b>${username}</b>${
       isBirthday ? ` ${isBirthday}` : ''
-    }, your Drupal.org account was created at <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
+    }, your Drupal.org account was created on <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
   };
   window.onhashchange = () => {
     fetchInformation();
