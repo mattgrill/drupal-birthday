@@ -8,7 +8,7 @@ const createPayload = (username, created, now) => {
   const userTime = moment.unix(created).tz('UTC');
   const currentTime = moment(now).tz('UTC');
   return {
-    display: userTime.format(`MMMM Do ${new Date().getFullYear()} @ HH:mm`),
+    display: userTime.format(`MMMM Do YYYY`),
     age: moment
       .duration(currentTime.diff(userTime, 'seconds'), 'seconds')
       .format({
@@ -16,7 +16,7 @@ const createPayload = (username, created, now) => {
         trim: 'all',
         largest: 3,
       }),
-    isBirthday: (userTime.isSame(currentTime) && '🎂') || false,
+    isBirthday: (userTime.isSame(currentTime, 'day') && '🎂') || false,
     username,
   };
 };
