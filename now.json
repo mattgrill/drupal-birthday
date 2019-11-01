@@ -1,9 +1,16 @@
 {
   "version": 2,
+  "builds": [
+    { "src": "*.html", "use": "@now/static" },
+    { "src": "**/*.js", "use": "@now/node" },
+    { "src": "/public/*.ico", "use": "@now/static" },
+    { "src": "/public/*.gif", "use": "@now/static" }
+  ],
   "routes": [
-    { "src": "/", "dest": "/api/index.js" },
-    { "src": "/api", "methods": ["POST"], "dest": "/api/lookup.js" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/api", "methods": ["GET"], "dest": "/api/lookup.js" },
     { "src": "/screen.js", "dest": "/public/screen.js" },
-    { "src": "/favicon.ico", "dest": "/public/favicon.ico" }
+    { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
+    { "src": "/throbber.gif", "dest": "/public/throbber.gif" }
   ]
 }
