@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  <title>Drupal Birthday . Fun</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    html,
+    body {
+      height: 100%;
+      text-align: center;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      text-rendering: geometricPrecision;
+    }
+    p {
+      color: #424242;
+      position: relative;
+    }
+    .loading-text {
+      padding-bottom: 30px;
+    }
+    .loading-text:after {
+      position: absolute;
+      content: ' ';
+      display: block;
+      width: 15px;
+      height: 15px;
+      bottom: 0;
+      left: 50%;
+      margin-right: -8px;
+      background-image: url("throbber.gif");
+      background-position: left bottom -5px;
+    }
+    .hidden:after {
+      background: none;
+    }
+  </style>
+  <meta name="title" content="Drupal Birthday . Fun" />
+  <meta name="description" content="Find your Drupal Birthday, for Fun!" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Drupal Birthday . Fun" />
+  <meta property="og:title" content="Drupal Birthday . Fun" />
+  <meta property="og:description" content="Find your Drupal Birthday, for Fun!" />
+  <meta property="og:url" content="https://drupalbirthday.fun/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Drupal Birthday . Fun" />
+  <meta name="twitter:description" content="Find your Drupal Birthday, for Fun!" />
+  <meta name="twitter:url" content="https://drupalbirthday.fun/" />
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "url": "https://drupalbirthday.fun/",
+      "name": "Drupal Birthday . Fun",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://drupalbirthday.fun/#{query}",
+        "query-input": "required"
+      }
+    }
+  </script>
+  </head>
+  <body>
+    <div id="root">
+      <p class="loading-text hidden">https://drupalbirthday.fun/#{your drupal.org username}</p>
+    </div>
+    <script>
+      (() => {
+        const fetchInformation = async () => {
+          const loader = window.document.querySelector('p.loading-text');
+          loader.classList.remove('hidden');
+
+          const response = await window.fetch(`/api?username=${encodeURIComponent(window.location.hash.substring(1))}`, {
+            cache: 'no-cache',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            referrer: 'no-referrer',
+          });
+          const { display, age, isBirthday, username } = await response.json();
+          document.getElementById('root').innerHTML = `<p>✌️ ${isBirthday ||
+            ''} <b>${username}</b>${
+            isBirthday ? ` ${isBirthday}` : ''
+          }, your Drupal.org account was created on <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
+        };
+        window.onhashchange = () => {
+          fetchInformation();
+        };
+        if (window.location.hash && window.location.hash !== '') {
+          fetchInformation();
+        }
+      })();
+    </script>
+  </body>
+</html>
