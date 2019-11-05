@@ -91,37 +91,6 @@
       </form>
     </div>
     <p class="github"><a href="https://github.com/mattgrill/drupal-birthday">github.com/mattgrill/drupal-birthday</a></p>
-    <script>
-      const form = document.getElementById('userNameQueryForm');
-      const fetchInformation = async (uname) => {
-        document.getElementById('submit').classList.remove('hidden');
-
-        const response = await window.fetch(`/api?username=${encodeURIComponent(uname)}`, {
-          cache: 'no-cache',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          referrer: 'no-referrer',
-        });
-        const { display, age, isBirthday, username } = await response.json();
-
-
-        history.pushState(null, null, `#${uname}`);
-
-        document.getElementById('root').innerHTML = `<p>✌️ ${isBirthday ||
-          ''} <b>${username}</b>${
-          isBirthday ? ` ${isBirthday}` : ''
-        }, your Drupal.org account was created on <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
-      };
-      if (window.location.hash && window.location.hash !== '') {
-        fetchInformation(window.location.hash.substr(1));
-      }
-      form
-        .addEventListener('submit', (e) => {
-          e.preventDefault();
-          fetchInformation(document.getElementById('uname').value);
-        });
-
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>

@@ -3,14 +3,17 @@
   "builds": [
     { "src": "*.html", "use": "@now/static" },
     { "src": "**/*.js", "use": "@now/node" },
-    { "src": "/public/*.ico", "use": "@now/static" },
-    { "src": "/public/*.gif", "use": "@now/static" }
+    { "src": "/public/*.js", "use": "@now/static" },
+    { "src": "/public/*.gif", "use": "@now/static" },
+    { "src": "/public/*.ico", "use": "@now/static" }
   ],
   "routes": [
     { "src": "/", "dest": "/index.html" },
+    { "src": "/index.js", "dest": "/public/index.js" },
     { "src": "/api", "methods": ["GET"], "dest": "/api/lookup.js" },
     { "src": "/screen.js", "dest": "/public/screen.js" },
     { "src": "/favicon.ico", "dest": "/public/favicon.ico" },
-    { "src": "/throbber.gif", "dest": "/public/throbber.gif" }
+    { "src": "/throbber.gif", "dest": "/public/throbber.gif" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
