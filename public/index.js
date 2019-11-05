@@ -21,10 +21,6 @@ const fetchInformation = async uname => {
     isBirthday ? ` ${isBirthday}` : ''
   }, your Drupal.org account was created on <b><time datetime="${display}">${display}</time></b>. Your account is <b>${age}</b> old. ✌️</p>`;
 };
-// Handle miserable hash style urls.
-if (window.location.hash && window.location.hash !== '') {
-  fetchInformation(window.location.hash.substr(1));
-}
 // Handle original style urls.
 if (window.location.pathname !== '/') {
   fetchInformation(window.location.pathname.split('/')[1]);
