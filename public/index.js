@@ -1,5 +1,15 @@
 const form = document.getElementById('userNameQueryForm');
+
+const setError = error => {
+  const errorsElement = document.getElementById('errors');
+  errorsElement.innerHTML = `<p class="error-message">${error}</p>`;
+};
+
 const fetchInformation = async uname => {
+  if (uname === '') {
+    setError('Please enter a user name.');
+    return;
+  }
   document.getElementById('submit').classList.remove('hidden');
 
   const response = await window.fetch(
@@ -12,6 +22,12 @@ const fetchInformation = async uname => {
       referrer: 'no-referrer',
     },
   );
+  if (response.status > 400) {
+    setError(
+      'There was a problem getting your Drupal Birthday. Try a different user name.',
+    );
+    return;
+  }
   const { display, age, isBirthday, username } = await response.json();
 
   window.history.pushState(null, null, `${uname}`);
