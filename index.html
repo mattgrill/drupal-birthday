@@ -56,6 +56,9 @@
     .visuallyhidden {
       display: none;
     }
+    .error-message {
+      color: red;
+    }
   </style>
   <meta name="title" content="Drupal Birthday . Fun" />
   <meta name="description" content="Find your Drupal Birthday, for Fun!" />
@@ -87,6 +90,7 @@
       <form id="userNameQueryForm">
         <label class="spacing big visuallyhidden" for="uname">Drupal.org User Name</label>
         <input class="big username spacing" type="text" id="uname" name="username" placeholder="Drupal.org User Name">
+        <div id="errors"></div>
         <input class="big loading-text hidden" type="submit" value="Submit" id="submit">
       </form>
     </div>
